@@ -49,22 +49,24 @@ function drawAnswer(data) {
         lon: data.coord.lon,
         code: data.code
     };
-    // iframe.onload = () => {
-        iframe.contentWindow.postMessage(mapData, '*');
-    // };
+    iframe.contentWindow.postMessage(mapData, '*');
+    updateVisible()
     
 }
 function updateVisible(){
     if(iframeVisible){
         iframe.style.display = 'block';
-        responseE.textContent = temp.data.metadata.street + " - " + temp.data.metadata.city;
     }else{
         iframe.style.display = 'none';
     }
     if(responseEVisible){
         responseE.style.display = 'block';
-        responseE.textContent = temp.data.code;
     }else{
         responseE.style.display = 'none';
+    }
+    if(iframeVisible == responseEVisible){
+        responseE.textContent = temp.data.metadata.street + " - " + temp.data.metadata.city;
+    }else{
+        responseE.textContent = temp.data.code;
     }
 }
